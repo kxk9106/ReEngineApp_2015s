@@ -5,6 +5,12 @@ void AppClass::InitWindow(String a_sWindowName)
 	m_v4ClearColor = vector4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
+matrix4 MyTranslate(matrix4 mat, vector4 vec)
+{
+	mat[3] = vec;
+	return mat;
+}
+
 void AppClass::InitVariables(void)
 {
 	//Sets the camera
@@ -19,6 +25,15 @@ void AppClass::InitVariables(void)
 
 	//Initializing the primitives
 	m_pSphere->GenerateSphere(0.5f, 5, REWHITE);
+
+	m_m4Sphere = IDENTITY_M4;
+	//m_m4Sphere[3] = vector4(1, 2, 0, 1);
+	m_m4Sphere[0, 0] *= 2.0f;
+	m_m4Sphere[1, 1] *= 2.0f;
+	m_m4Sphere[2, 2] *= 2.0f;
+	//m_m4Sphere = MyTranslate(m_m4Sphere, vector4(1, 2, 0, 1));
+	m_m4Sphere = glm::translate(IDENTITY_M4, vector3(1, 2, 0));
+	//m_m4Sphere = glm::scale(IDENTITY_M4, vector3(2.0f, 2.0f, 2.0f));
 }
 
 void AppClass::Update(void)
