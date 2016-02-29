@@ -127,27 +127,27 @@ void MyPrimitive::GenerateCone(float a_fRadius, float a_fHeight, int a_nSubdivis
 	AddQuad(point0, point1, point3, point2);*/
 	
 	
-	for (int i = 1; i < a_nSubdivisions; i++)
+	for (int i = 0; i < a_nSubdivisions; i++)
 	{
-		float angle = (360 / a_nSubdivisions) * 3.14159265 / 180 *i;
+		//float angle = (360 / a_nSubdivisions) * 3.14159265 / 180 *i;
+		float angle = i*3.14149265 / a_nSubdivisions;
 		//float angle2 = 360 - 90 - angle;
 
 		vector3 point0(0.f, 0.f, 0.f);
 
 		//find side of tri
+		//float x = cos(angle)*a_fRadius;
+		//float z = sin(angle)*a_fRadius;
 		float x = cos(angle)*a_fRadius;
 		float z = sin(angle)*a_fRadius;
 
-		vector3 point1(x, 0, z);
-		vector3 point3(-x, 0, z);
+		vector3 point1(-x, 0, z);
+		vector3 point3(x, 0, z);
 
 
 		//float twoX = x + x;
 		vector3 point2(0, a_fHeight, 0);
-		//AddQuad(point0, point1, point2, point3);
-		AddVertexPosition(point2);
-		AddVertexPosition(point1);
-		AddVertexPosition(point3);
+		AddQuad(point0, point1, point3, point2);
 		
 	}
 
