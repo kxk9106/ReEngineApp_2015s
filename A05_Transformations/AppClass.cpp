@@ -46,14 +46,23 @@ void AppClass::Update(void)
 	//This matrices will hold the relative transformation of the Moon and the Earth
 	matrix4 distanceEarth = glm::translate(11.0f, 0.0f, 0.0f);
 	matrix4 distanceMoon = glm::translate(2.0f, 0.0f, 0.0f);
+
+	
 #pragma endregion
 
 #pragma region YOUR CODE GOES HERE
 	//Calculate the position of the Earth
 	m_m4Earth = glm::rotate(IDENTITY_M4, m_fEarthTimer, vector3(0.0f, 1.0f, 0.0f));
+	m_m4Earth = m_m4Earth * distanceEarth;
 
 	//Calculate the position of the Moon
 	m_m4Moon = glm::rotate(IDENTITY_M4, m_fMoonTimer, vector3(0.0f, 1.0f, 0.0f));
+	m_m4Moon =  m_m4Earth* m_m4Moon*distanceMoon;
+
+	m_m4Earth = m_m4Earth   *glm::rotate(IDENTITY_M4, m_fEarthTimer * 28, vector3(0.0f, 1.0f, 0.0f))* rotateX;
+	m_m4Moon = m_m4Moon* glm::rotate(IDENTITY_M4, m_fMoonTimer/28, vector3(0.0f, 1.0f, 0.0f)) *rotateX;
+
+
 #pragma endregion
 
 #pragma region Print info
