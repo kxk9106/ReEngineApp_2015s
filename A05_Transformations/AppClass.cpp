@@ -56,11 +56,11 @@ void AppClass::Update(void)
 	m_m4Earth = m_m4Earth * distanceEarth;
 
 	//Calculate the position of the Moon
-	m_m4Moon = glm::rotate(IDENTITY_M4, m_fMoonTimer, vector3(0.0f, 1.0f, 0.0f));
+	m_m4Moon = glm::rotate(IDENTITY_M4, m_fMoonTimer, vector3(0.0f, -1.0f, 0.0f));
 	m_m4Moon =  m_m4Earth* m_m4Moon*distanceMoon;
 
 	m_m4Earth = m_m4Earth   *glm::rotate(IDENTITY_M4, m_fEarthTimer * 28, vector3(0.0f, 1.0f, 0.0f))* rotateX;
-	m_m4Moon = m_m4Moon* glm::rotate(IDENTITY_M4, m_fMoonTimer/28, vector3(0.0f, 1.0f, 0.0f)) *rotateX;
+	m_m4Moon = m_m4Moon* glm::rotate(IDENTITY_M4, m_fMoonTimer/28, vector3(0.0f, 1.0f, 0.0f))*rotateY*rotateX;
 
 
 #pragma endregion
@@ -107,7 +107,7 @@ void AppClass::Display(void)
 	}
 
 	//Renders the meshes using the specified position given by the matrix and in the specified color
-	//m_pSun->Render(m_pCameraMngr->GetProjectionMatrix(), m_pCameraMngr->GetViewMatrix(), m_m4Sun);
+	m_pSun->Render(m_pCameraMngr->GetProjectionMatrix(), m_pCameraMngr->GetViewMatrix(), m_m4Sun);
 	m_pEarth->Render(m_pCameraMngr->GetProjectionMatrix(), m_pCameraMngr->GetViewMatrix(), m_m4Earth);
 	m_pMoon->Render(m_pCameraMngr->GetProjectionMatrix(), m_pCameraMngr->GetViewMatrix(), m_m4Moon);
 	
