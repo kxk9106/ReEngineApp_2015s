@@ -37,7 +37,7 @@ void AppClass::InitVariables(void)
 			0.0f, //new min
 			1.0f //new max
 			);
-		m_pSphere[i].GenerateSphere(0.5f, 5, RERED /*vector3(1.0f, 0.0f, 0.0f)*/);
+		m_pSphere[i].GenerateSphere(0.5f, 5, vector3(fPercent, 0.3f, 0.2f) /*vector3(1.0f, 0.0f, 0.0f)*/);
 		vector3 v3Current = glm::lerp(v3Start, v3End, fPercent);
 		m_pMatrix[i] = glm::translate(v3Current);
 	}
