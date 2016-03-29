@@ -1,7 +1,7 @@
 #include "AppClass.h"
 void AppClass::InitWindow(String a_sWindowName)
 {
-	super::InitWindow("SLERP - YOUR USER NAME GOES HERE"); // Window Name
+	super::InitWindow("SLERP - Kristen Kanekuni"); // Window Name
 
 	//Setting the color to black
 	m_v4ClearColor = vector4(0.0f);
@@ -15,10 +15,15 @@ void AppClass::InitVariables(void)
 	//Setting the color to black
 	m_v4ClearColor = vector4(0.0f);
 
+	
+
 	//Loading the models
 	m_pMeshMngr->LoadModel("Planets\\00_Sun.obj", "Sun");
 	m_pMeshMngr->LoadModel("Planets\\03_Earth.obj", "Earth");
 	m_pMeshMngr->LoadModel("Planets\\03A_Moon.obj", "Moon");
+
+
+	
 
 	//Setting the days duration
 	m_fDay = 1.0f;
@@ -47,10 +52,44 @@ void AppClass::Update(void)
 	float fEarthHalfRevTime = 0.5f * m_fDay; // Move for Half a day
 	float fMoonHalfOrbTime = 14.0f * m_fDay; //Moon's orbit is 28 earth days, so half the time for half a route
 
+	float fPercent = MapValue(static_cast<float>(fRunTime), 0.0f, static_cast<float>(fEarthHalfOrbTime/2), 0.0f, 1.0f);
+	
+
+	glm::quat qQuaternion1;
+	glm::quat qQuaternion2 = glm::angleAxis(90.0f, vector3(0.0f, 1.0f, 0.0f));
+	m_m4Earth = glm::mat4_cast(glm::mix(qQuaternion1, qQuaternion2, fPercent));
+	
+
+	float fPercentMoon = MapValue(static_cast<float>(fRunTime), 0.0f, fMoonHalfOrbTime/2, 0.0f, 1.0f);
+	m_m4Moon = glm::mat4_cast(glm::mix(qQuaternion1, qQuaternion2, fPercentMoon));
+
+	float fPercentEarthRot = MapValue(static_cast<float>(fRunTime), 0.0f, fEarthHalfRevTime / 2, 0.0f, 1.0f);
+	m_m4EarthRot = glm::mat4_cast(glm::mix(qQuaternion1, qQuaternion2, fPercentEarthRot));
+
+
+	//matrix4 rotateX = glm::rotate(IDENTITY_M4, 90.0f, vector3(1.0f, 0.0f, 0.0f));
+	//matrix4 rotateY = glm::rotate(IDENTITY_M4, 90.0f, vector3(0.0f, 1.0f, 0.0f));
+
+	matrix4 distanceEarth = glm::translate(11.0f, 0.0f, 0.0f);
+	matrix4 distanceMoon = glm::translate(2.0f, 0.0f, 0.0f);
+
+	matrix4 scaleSun = glm::scale(vector3(5.936));
+	matrix4 scaleEarth = glm::scale(vector3(.524));
+	matrix4 scaleMoon =  glm::scale(vector3(.27));
+
+	m_m4Earth =  m_m4Earth * distanceEarth * scaleEarth;
+
+	m_m4Moon = m_m4Earth * m_m4Moon * distanceMoon * scaleMoon;
+
+	m_m4Earth = m_m4Earth * m_m4EarthRot;
+	//m_m4Moon = m_m4Moon * m_m4Moon;
+
+
+
 	//Setting the matrices
-	m_pMeshMngr->SetModelMatrix(IDENTITY_M4, "Sun");
-	m_pMeshMngr->SetModelMatrix(IDENTITY_M4, "Earth");
-	m_pMeshMngr->SetModelMatrix(IDENTITY_M4, "Moon");
+	m_pMeshMngr->SetModelMatrix(scaleSun, "Sun");
+	m_pMeshMngr->SetModelMatrix(m_m4Earth, "Earth");
+	m_pMeshMngr->SetModelMatrix(m_m4Moon, "Moon");
 
 	//Adds all loaded instance to the render list
 	m_pMeshMngr->AddInstanceToRenderList("ALL");
@@ -58,6 +97,27 @@ void AppClass::Update(void)
 	static int nEarthOrbits = 0;
 	static int nEarthRevolutions = 0;
 	static int nMoonOrbits = 0;
+	static int nCountOrb = 1;
+	static int nCountRev = 1;
+	static int nCountMoon = 1;
+
+	if (fRunTime > fEarthHalfOrbTime*2 * nCountOrb) {
+		nEarthOrbits++;
+		nCountOrb++;
+		fCallTime = 0.0;
+	}
+
+	if (fRunTime > fEarthHalfRevTime * 2 * nCountRev) {
+		nEarthRevolutions++;
+		nCountRev++;
+		fCallTime = 0.0;
+	}
+
+	if (fRunTime > fMoonHalfOrbTime * 2 * nCountMoon) {
+		nMoonOrbits++;
+		nCountMoon++;
+		fCallTime = 0.0;
+	}
 
 	//Indicate the FPS
 	int nFPS = m_pSystem->GetFPS();
