@@ -1,10 +1,13 @@
 #include "AppClass.h"
 void AppClass::InitWindow(String a_sWindowName)
 {
-	super::InitWindow("E10_Projections"); // Window Name
+	super::InitWindow("Kanekuni_Solomon_E10_Projections"); // Window Name
 }
 void AppClass::InitVariables(void)
 {
+	//Camera singleton
+	camera = new CameraSingleton();
+
 	//Generate the Cone
 	m_pCone = new PrimitiveClass();
 	m_pCone->GenerateCone(1.0f, 1.0f, 10, RERED);
@@ -61,6 +64,8 @@ void AppClass::Update(void)
 		glm::vec3(m_quatOrientation.x, m_quatOrientation.y, m_quatOrientation.z), // What i'm looking at
 		glm::vec3(0.0f, 1.0f, 0.0f)); // rotation orientation - currently up
 	*/
+	camera->MoveForward(1.0f);
+
 	int nFPS = m_pSystem->GetFPS();
 	m_pMeshMngr->PrintLine(m_pSystem->GetAppName(), REYELLOW);
 	m_pMeshMngr->Print("X:", REYELLOW);
@@ -84,10 +89,12 @@ void AppClass::Display(void)
 	m_pMeshMngr->AddGridToQueue(1.0f, REAXIS::XY);
 
 	//Render the cone
-	m_pCone->Render(m_m4Projection, m_m4View, IDENTITY_M4);
+	m_pCone->Render(camera->GetProjection(true),camera->GetView(), IDENTITY_M4);
 
 	//Render the cylinder
-	m_pCylinder->Render(m_m4Projection, m_m4View, glm::translate(IDENTITY_M4, REAXISZ * -3.0f));
+	//m_pCylinder->Render(m_m4Projection, m_m4View, glm::translate(IDENTITY_M4, REAXISZ * -3.0f));
+
+	
 
 	//Render the rest of the meshes
 	m_pMeshMngr->Render();
@@ -101,55 +108,12 @@ void AppClass::Release(void)
 	//Release the memory of the member fields
 	SafeDelete(m_pCone);
 	SafeDelete(m_pCylinder);
+	SafeDelete(camera);
 
 	//Release the memory of the inherited fields
 	super::Release(); 
 }
 
-/*matrix4 AppClass::GetView(void)
-{
 
-}
-matrix4 AppClass::GetProjection(bool bOrtographic)
-{
-
-}
-										 
-void AppClass::SetPosition(vector3 v3Position)
-{
-
-}
-void AppClass::SetTarget(vector3 v3Target)
-{
-
-}
-void AppClass::SetUp(vector3 v3Up)
-{
-
-}
-void AppClass::MoveForward(float fIncrement)
-{
-
-}
-void AppClass::MoveSideways(float fIncrement)
-{
-
-}
-void AppClass::MoveVertical(float fIncrement)
-{
-
-}
-void AppClass::ChangePitch(float fIncrement)
-{
-
-}
-void AppClass::ChangeRoll(float fIncrement)
-{
-
-}
-void AppClass::ChangeYaw(float fIncrement)
-{
-
-}*/
 
 

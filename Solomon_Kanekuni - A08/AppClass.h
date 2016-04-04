@@ -6,6 +6,7 @@ Date: 2015/09
 #define __APPLICATION_H_
 
 #include "RE\ReEngAppClass.h"
+#include "CameraSingleton.h"
 #include <SFML\Graphics.hpp>
 //#include <chrono>
 
@@ -13,6 +14,8 @@ using namespace ReEng; //Using ReEng namespace to use all the classes in the dll
 
 class AppClass : public ReEngAppClass
 {
+	CameraSingleton* camera = nullptr;
+
 	PrimitiveClass* m_pCone = nullptr;
 	PrimitiveClass* m_pCylinder = nullptr;
 

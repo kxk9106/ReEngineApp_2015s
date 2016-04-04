@@ -4,7 +4,10 @@
 
 CameraSingleton::CameraSingleton()
 {
-	m4_CameraProjection = matrix4(0.0f);
+	v3_Position = glm::vec3(0.0f, 0.0f, 15.0f);
+	v3_Target = glm::vec3(0.0f, 0.0f, -3.0f);
+	v3_Orientation = glm::vec3(0.0f, 1.0f, 0.0f);
+	m4_CameraView = matrix4(0.0f);
 }
 
 
@@ -12,23 +15,33 @@ CameraSingleton::~CameraSingleton()
 {
 }
 
-matrix4 CameraSingleton::GetView(void)
+matrix4 CameraSingleton::GetView()
 {
 	// Return the camera's projection.
-	return m4_CameraProjection;
+	return m4_CameraView;
 }
 matrix4 CameraSingleton::GetProjection(bool bOrtho)
 {
 	// If true
 	if (bOrtho) {
 		// Return Ortho.
-		return m4_OrthoProjection;
+		return glm::ortho(
+			-20.0f,//left 
+			20.0f,//right 
+			-10.0f,//bottom
+			10.0f,///top
+			0.01f,//near, 
+			1000.0f);//far);
 		
 	}
 	else
 	{
 		// Return Perspective.
-		return m4_PerspectiveProjection;
+		return glm::perspective(
+			45.0f, // Camera viewing angle
+			1080.0f / 768.0f, // Camera viewing ratio
+			0.01f,
+			1000.0f);
 	}
 }
 
@@ -61,9 +74,16 @@ void CameraSingleton::SetUp(vector3 v3Up)
 }
 void CameraSingleton::MoveForward(float fIncrement)
 {
+	// Set position to argument.
 
-	m4_CameraView *= glm::translate(vector3(0.0f, 0.0f, fIncrement));
-	
+
+	v3_Position -= vector3(0.0f, 0.0f, fIncrement);
+	v3_Target += glm::vec3(0.0f, 1.0f, 0.0f) * v3_Position;
+	m4_CameraView = glm::lookAt(
+		v3_Position, // Position
+		v3_Target, // What i'm looking at
+		v3_Orientation); // rotation orientation - currently up
+
 }
 void CameraSingleton::MoveSideways(float fIncrement)
 {

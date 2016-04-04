@@ -9,7 +9,6 @@ public:
 	CameraSingleton();
 	~CameraSingleton();
 
-	matrix4 m4_CameraProjection;
 	matrix4 m4_OrthoProjection;
 	matrix4 m4_PerspectiveProjection;
 	matrix4 m4_CameraView;
