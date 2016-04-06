@@ -64,7 +64,7 @@ void AppClass::Update(void)
 		glm::vec3(m_quatOrientation.x, m_quatOrientation.y, m_quatOrientation.z), // What i'm looking at
 		glm::vec3(0.0f, 1.0f, 0.0f)); // rotation orientation - currently up
 	*/
-	camera->MoveForward(1.0f);
+	//camera->MoveForward(3.00f);
 
 	int nFPS = m_pSystem->GetFPS();
 	m_pMeshMngr->PrintLine(m_pSystem->GetAppName(), REYELLOW);
@@ -89,12 +89,10 @@ void AppClass::Display(void)
 	m_pMeshMngr->AddGridToQueue(1.0f, REAXIS::XY);
 
 	//Render the cone
-	m_pCone->Render(camera->GetProjection(true),camera->GetView(), IDENTITY_M4);
+	m_pCone->Render(camera->GetProjection(false),camera->GetView(), IDENTITY_M4);
 
 	//Render the cylinder
-	//m_pCylinder->Render(m_m4Projection, m_m4View, glm::translate(IDENTITY_M4, REAXISZ * -3.0f));
-
-	
+	//m_pCylinder->Render(m_m4Projection, m_m4View, IDENTITY_M4);
 
 	//Render the rest of the meshes
 	m_pMeshMngr->Render();

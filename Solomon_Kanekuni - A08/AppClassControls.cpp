@@ -21,7 +21,7 @@ void AppClass::ProcessKeyboard(void)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F1))
 	{
 		m_m4Projection = glm::perspective(45.0f, 1080.0f / 768.0f, 0.01f, 1000.0f);
-		m_m4View = glm::lookAt(glm::vec3(0.0f, 0.0f, 15.0f), glm::vec3(0.0f, 0.0f, 14.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		m_m4View = glm::lookAt(glm::vec3(0.0f, 0.0f, 15.0f), glm::vec3(0.0f, 0.0f, 15.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	}
 
 	//F2 Controllers
@@ -99,24 +99,42 @@ void AppClass::ProcessKeyboard(void)
 		fSpeed *= 10.0f;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
+		
+		if (camera->v3_Position.z > 1.5f) {
+			camera->MoveForward(.50f);
+		}
+		
 		//m_m4View *=  glm::translate( glm::vec3(1.0f, 0.0f, 0.0f));
 	}
 		
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
-
+		if (camera->v3_Position.z < 1000.5f) {
+			camera->MoveForward(-.50f);
+		}
 	}
 	
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
-
+		camera->MoveSideways(.50f);
+		
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
+		camera->MoveSideways(-.50f);
+	}
 
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+	{
+		camera->MoveVertical(-.50f);
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+	{
+		camera->MoveVertical(.50f);
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::X))
