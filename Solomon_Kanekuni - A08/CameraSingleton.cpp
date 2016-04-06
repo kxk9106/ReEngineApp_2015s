@@ -1,19 +1,17 @@
 #include "CameraSingleton.h"
 
 
-
+// Constructor
 CameraSingleton::CameraSingleton()
 {
+	// Set the defaults
 	v3_Position = glm::vec3(0.0f, 0.0f, 10.0f);
-	//v3_Front = glm::vec3(0.0f, 0.0f, 3.0f);
-	v3_Target = glm::vec3(0.0f, 0.0f, 7.0f);
+	v3_Target = glm::vec3(0.0f, 0.0f, -1.0f);
 	v3_Orientation = glm::vec3(0.0f, 1.0f, 0.0f);
-	m4_CameraView = matrix4(0.0f);
-}
-
-
-CameraSingleton::~CameraSingleton()
-{
+	m4_CameraView = glm::lookAt(
+		v3_Position, // Position
+		v3_Target, // What i'm looking at
+		v3_Orientation); // rotation orientation - currently up
 }
 
 matrix4 CameraSingleton::GetView()
@@ -73,41 +71,56 @@ void CameraSingleton::SetUp(vector3 v3Up)
 		v3_Target, // What i'm looking at
 		v3_Orientation); // rotation orientation - currently up
 }
+
+// Function to move forward
 void CameraSingleton::MoveForward(float fIncrement)
 {
 		// Set position to argument.
-		v3_Position -= vector3(0.0f, 0.0f, fIncrement);
-		v3_Target += v3_Position; //vector3(0.0f, 0.0f, fIncrement));
+		v3_Position += vector3(0.0f, 0.0f, fIncrement);
+
 		m4_CameraView = glm::lookAt(
 			v3_Position, // Position
-			glm::normalize(v3_Target), // What i'm looking at
+			v3_Position + v3_Target, // What i'm looking at
 			v3_Orientation); // rotation orientation - currently up
 
 }
+
+// Function to move left or right
 void CameraSingleton::MoveSideways(float fIncrement)
 {
 	// Set position to argument.
-	v3_Position -= vector3(fIncrement, 0.0f,0.0f);
-	v3_Target += v3_Position; //vector3(0.0f, 0.0f, fIncrement));
+	v3_Position += vector3(fIncrement, 0.0f, 0.0f);
 	m4_CameraView = glm::lookAt(
 		v3_Position, // Position
-		glm::normalize(v3_Target), // What i'm looking at
+		v3_Position + v3_Target, // What i'm looking at
 		v3_Orientation); // rotation orientation - currently up
 }
+
+// Function to move up or down.
 void CameraSingleton::MoveVertical(float fIncrement)
 {
 	// Set position to argument.
 	v3_Position += vector3(0.0f, fIncrement, 0.0f);
-	v3_Target += v3_Position * vector3(0.0f, fIncrement, 0.0f);
-	//v3_Target = glm::normalize(v3_Target);
 	m4_CameraView = glm::lookAt(
 		v3_Position, // Position
-		glm::normalize(v3_Target), // What i'm looking at
+		v3_Position + v3_Target, // What i'm looking at
 		v3_Orientation); // rotation orientation - currently up
 }
+
 void CameraSingleton::ChangePitch(float fIncrement)
 {
+	//m_quatOrientation = m_quatOrientation * quaternion(vector3( 0.0f, 0.0f, fIncrement));
+	//v3_Position += vector3(0.0f, fIncrement, 0.0f);
+	//v3_Orientation += vector3(m_quatOrientation.x, m_quatOrientation.y, m_quatOrientation.z);
+	v3_Position += vector3(0.0f, fIncrement, fIncrement);
+	vector3 dir = glm::normalize(v3_Position - v3_Target);
 
+	//v3_Target += v3_Position * v3_Orientation;
+	//v3_Target = glm::normalize(v3_Target);
+	m4_CameraView = glm::lookAt(
+		glm::normalize(v3_Position * dir), // Position
+		v3_Target, // What i'm looking at
+		v3_Orientation); // rotation orientation - currently up
 }
 void CameraSingleton::ChangeRoll(float fIncrement)
 {
@@ -116,4 +129,16 @@ void CameraSingleton::ChangeRoll(float fIncrement)
 void CameraSingleton::ChangeYaw(float fIncrement)
 {
 
+}
+
+// Sets the values back to default
+void CameraSingleton::ResetValues() {
+	v3_Position = glm::vec3(0.0f, 0.0f, 10.0f);
+	//v3_Front = glm::vec3(0.0f, 0.0f, 3.0f);
+	v3_Target = glm::vec3(0.0f, 0.0f, -1.0f);
+	v3_Orientation = glm::vec3(0.0f, 1.0f, 0.0f);
+	m4_CameraView = glm::lookAt(
+		v3_Position, // Position
+		v3_Target, // What i'm looking at
+		v3_Orientation); // rotation orientation - currently up
 }

@@ -7,7 +7,6 @@ class CameraSingleton
 {
 public:
 	CameraSingleton();
-	~CameraSingleton();
 
 	matrix4 m4_OrthoProjection;
 	matrix4 m4_PerspectiveProjection;
@@ -19,6 +18,8 @@ public:
 	vector3 v3_Position;
 	vector3 v3_Target;
 	vector3 v3_Orientation;
+
+	quaternion m_quatOrientation;
 
 	matrix4 GetView(void); //Should get the View Matrix from your singleton
 	matrix4 GetProjection(bool bOrtographic); //Should get the Projection Matrix 
@@ -33,6 +34,7 @@ public:
 	void ChangePitch(float fIncrement);//Orient your camera (meaning the forward and up vectors) changing its angle in x
 	void ChangeRoll(float fIncrement);//Orient your camera (meaning the forward and up vectors) changing its angle in z
 	void ChangeYaw(float fIncrement);//Orient your camera (meaning the forward and up vectors) changing its angle in y
+	void ResetValues(void); // Reset the values back to default.
 };
 
 #endif //__CAMERASINGLETON_H_

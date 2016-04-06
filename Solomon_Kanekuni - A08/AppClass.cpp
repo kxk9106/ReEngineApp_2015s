@@ -40,40 +40,15 @@ void AppClass::Update(void)
 
 	//Adds all loaded instance to the render list
 	m_pMeshMngr->AddInstanceToRenderList("ALL");
-	/*
-	m_m4Projection = glm::perspective(
-		45.0f, // Camera viewing angle
-		1080.0f / 768.0f, // Camera viewing ratio
-		0.01f,
-		1000.0f);
-		*/
-
-	/*glm::ortho(
-		-20.0f,//left 
-		20.0f,//right 
-		-10.0f,//bottom
-		10.0f,///top
-		0.01f,//near, 
-		1000.0f);//far);
-		*/
-		
-	
-	/*
-	m_m4View = glm::lookAt(
-		glm::vec3(0.0f, 0.0f, 15.0f), // Position
-		glm::vec3(m_quatOrientation.x, m_quatOrientation.y, m_quatOrientation.z), // What i'm looking at
-		glm::vec3(0.0f, 1.0f, 0.0f)); // rotation orientation - currently up
-	*/
-	//camera->MoveForward(3.00f);
 
 	int nFPS = m_pSystem->GetFPS();
 	m_pMeshMngr->PrintLine(m_pSystem->GetAppName(), REYELLOW);
-	m_pMeshMngr->Print("X:", REYELLOW);
-	m_pMeshMngr->PrintLine(std::to_string(m_quatOrientation.x), RERED);
-	m_pMeshMngr->Print("Y:", REYELLOW);
-	m_pMeshMngr->PrintLine(std::to_string(m_quatOrientation.y), RERED);
-	m_pMeshMngr->Print("Z:", REYELLOW);
-	m_pMeshMngr->PrintLine(std::to_string(m_quatOrientation.z), RERED);
+	m_pMeshMngr->Print("P-X:", REYELLOW);
+	m_pMeshMngr->PrintLine(std::to_string(camera->v3_Position.x), RERED);
+	m_pMeshMngr->Print("P-Y:", REYELLOW);
+	m_pMeshMngr->PrintLine(std::to_string(camera->v3_Position.y), RERED);
+	m_pMeshMngr->Print("P-Z:", REYELLOW);
+	m_pMeshMngr->PrintLine(std::to_string(camera->v3_Position.z), RERED);
 
 	m_pMeshMngr->Print("FPS:");
 	m_pMeshMngr->Print(std::to_string(nFPS), RERED);
@@ -89,10 +64,10 @@ void AppClass::Display(void)
 	m_pMeshMngr->AddGridToQueue(1.0f, REAXIS::XY);
 
 	//Render the cone
-	m_pCone->Render(camera->GetProjection(false),camera->GetView(), IDENTITY_M4);
+	//m_pCone->Render(camera->GetProjection(false),camera->GetView(), IDENTITY_M4);
 
 	//Render the cylinder
-	//m_pCylinder->Render(m_m4Projection, m_m4View, IDENTITY_M4);
+	m_pCylinder->Render(camera->GetProjection(false), camera->GetView() , IDENTITY_M4 * glm::mat4(3.0f));
 
 	//Render the rest of the meshes
 	m_pMeshMngr->Render();
