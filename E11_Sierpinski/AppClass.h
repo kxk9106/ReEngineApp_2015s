@@ -32,6 +32,11 @@ public:
 	MyMesh* m_pMesh = nullptr;
 	float* m_fMatrixArray = nullptr;
 	int m_nObjects = 200;
+	int prevRow;
+	int col = 2;
+
+	int createTri(int);
+	int factorial(int);
 
 	/* Constructor */
 	AppClass(HINSTANCE hInstance, LPWSTR lpCmdLine, int nCmdShow) : super(hInstance, lpCmdLine, nCmdShow) {}

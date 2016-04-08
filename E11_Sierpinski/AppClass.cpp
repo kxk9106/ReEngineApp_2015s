@@ -5,29 +5,111 @@ void AppClass::InitWindow(String a_sWindowName)
 	super::InitWindow("Instance Rendering");
 }
 
+/*void AppClass::createTri(int num) {
+	//if (num <= 1) {
+	//	return 1;
+	//}
+	m_fMatrixArray = new float[ 3 * 16];
+	for (int i = 0; i < 3; i++) {
+		if (i == 0) {
+		
+		const float* m4MVP = glm::value_ptr(glm::translate(vector3(1.0f, 0.0f, 0)));
+		//const float* m4MVPTwo = glm::value_ptr(glm::translate(vector3(num * 2.0f, num * 2.0f, 0)));
+
+		memcpy(&m_fMatrixArray[ 0 * 16], m4MVP, 16 * sizeof(float));
+		//memcpy(&m_fMatrixArray[32], m4MVPTwo, 32 * sizeof(float));
+		//return createTri(num - 1);
+		}
+
+		if (i == 1) {
+			//m_fMatrixArray = new float[16];
+			const float* m4MVP = glm::value_ptr(glm::translate(vector3(-1.0f,  -1.0f, 0)));
+			//const float* m4MVPTwo = glm::value_ptr(glm::translate(vector3(num * 2.0f, num * 2.0f, 0)));
+		
+			memcpy(&m_fMatrixArray[ 1* 16], m4MVP, 16 * sizeof(float));
+			//memcpy(&m_fMatrixArray[32], m4MVPTwo, 32 * sizeof(float));
+			//return createTri(num - 1);
+		}
+
+
+		if (i == 2) {
+			//m_fMatrixArray = new float[16];
+			const float* m4MVP = glm::value_ptr(glm::translate(vector3(1.0f, -1.0f, 0)));
+			//const float* m4MVPTwo = glm::value_ptr(glm::translate(vector3(num * 2.0f, num * 2.0f, 0)));
+
+			memcpy(&m_fMatrixArray[ 2 * 16], m4MVP, 16 * sizeof(float));
+			//memcpy(&m_fMatrixArray[32], m4MVPTwo, 32 * sizeof(float));
+			//return createTri(num - 1);
+		}
+		
+	}
+}*/
+
+int AppClass::createTri(int num) {
+	if (num <= 1) {
+		return 1;
+	}
+
+	if (prevRow > num) {
+		col--;
+
+	}
+	
+		const float* m4MVP = glm::value_ptr(glm::translate(vector3(num * 2, col, 0)));
+		memcpy(&m_fMatrixArray[num * 16], m4MVP, 16 * sizeof(float));
+		prevRow = num;
+
+		return createTri(num - 1);
+		
+}
+
 void AppClass::InitVariables(void)
 {
 	m_pCameraMngr->SetPositionTargetAndView(vector3(0.0f, 0.0f, 15.0f), vector3(0.0f, 0.0f, 0.0f), REAXISY);
 
 	m_pMesh = new MyMesh();
+
 	
+
 	//Creating the Mesh points
 	m_pMesh->AddVertexPosition(vector3(-1.0f, -1.0f, 0.0f));
-	m_pMesh->AddVertexColor(RERED);
+	m_pMesh->AddVertexColor(REGREEN);
 	m_pMesh->AddVertexPosition(vector3( 1.0f, -1.0f, 0.0f));
 	m_pMesh->AddVertexColor(RERED);
-	m_pMesh->AddVertexPosition(vector3(-1.0f,  1.0f, 0.0f));
-	m_pMesh->AddVertexColor(RERED);
-	m_pMesh->AddVertexPosition(vector3(-1.0f,  1.0f, 0.0f));
+	m_pMesh->AddVertexPosition(vector3(0.0f,  1.0f, 0.0f));
+	m_pMesh->AddVertexColor(REBLUE);
+	/*m_pMesh->AddVertexPosition(vector3(-1.0f,  1.0f, 0.0f));
 	m_pMesh->AddVertexColor(REBLUE);
 	m_pMesh->AddVertexPosition(vector3(1.0f, -1.0f, 0.0f));
 	m_pMesh->AddVertexColor(REBLUE);
 	m_pMesh->AddVertexPosition(vector3( 1.0f, 1.0f, 0.0f));
-	m_pMesh->AddVertexColor(REBLUE);
+	m_pMesh->AddVertexColor(REBLUE);*/
 
 	//Compiling the mesh
 	m_pMesh->CompileOpenGL3X();
+
+	/*m_nObjects = 100;
+
+	m_fMatrixArray = new float[m_nObjects * 16];
+
+	for (uint n = 0; n < m_nObjects; n++) {
+		const float* m4MVP = glm::value_ptr(glm::translate(vector3(n * 2, 0, 0)));
+		memcpy(&m_fMatrixArray[n * 16], m4MVP, 16 * sizeof(float));
+	}*/
+
+	m_fMatrixArray = new float[60 * 16];
+	createTri(3);
 }
+
+/*int AppClass::factorial(int num) {
+	if (num <= 1) {
+		return 1;
+	}
+
+	return num * factorial(num - 1);
+}*/
+
+
 
 void AppClass::Update(void)
 {
@@ -54,25 +136,23 @@ void AppClass::Update(void)
 	m_pMeshMngr->Print("FPS:");
 	m_pMeshMngr->Print(std::to_string(nFPS), RERED);
 
-	m_nObjects = 100;
+/*	m_nObjects = 100;
 
 	m_fMatrixArray = new float[m_nObjects * 16];
 
 	for (uint n = 0; n < m_nObjects; n++) {
 		const float* m4MVP = glm::value_ptr(glm::translate(vector3(n * 2, 0, 0)));
 		memcpy(&m_fMatrixArray[n * 16], m4MVP, 16 * sizeof(float));
-	}
+	}*/
+
+
+
+	
 
 	
 }
 
-int factorial(int num) {
-	if (num <= 1) {
-		return 1;
-	}
-	
-	return num * factorial(num - 1);
-}
+
 
 void AppClass::Display(void)
 {
