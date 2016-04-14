@@ -1,4 +1,6 @@
 #include "MyPrimitive.h"
+#include <stdio.h>
+#include <math.h>
 MyPrimitive::MyPrimitive() { }
 MyPrimitive::MyPrimitive(const MyPrimitive& other) { }
 MyPrimitive& MyPrimitive::operator=(const MyPrimitive& other) { return *this; }
@@ -30,32 +32,35 @@ void MyPrimitive::AddQuad(vector3 a_vBottomLeft, vector3 a_vBottomRight, vector3
 	AddVertexPosition(a_vBottomRight);
 	AddVertexPosition(a_vTopRight);
 }
+
+
+
 void MyPrimitive::GeneratePlane(float a_fSize, vector3 a_v3Color)
 {
-	if (a_fSize < 0.01f)
-		a_fSize = 0.01f;
+if (a_fSize < 0.01f)
+	a_fSize = 0.01f;
 
-	Release();
-	Init();
+Release();
+Init();
 
-	float fValue = 0.5f * a_fSize;
+float fValue = 0.5f * a_fSize;
 
-	vector3 pointA(-fValue, -fValue, 0.0f); //0
-	vector3 pointB(fValue, -fValue, 0.0f); //1
-	vector3 pointC(fValue, fValue, 0.0f); //2
-	vector3 pointD(-fValue, fValue, 0.0f); //3
+vector3 pointA(-fValue, -fValue, 0.0f); //0
+vector3 pointB(fValue, -fValue, 0.0f); //1
+vector3 pointC(fValue, fValue, 0.0f); //2
+vector3 pointD(-fValue, fValue, 0.0f); //3
 
-	vector3 pointE(fValue, -fValue, -0.001f); //1
-	vector3 pointF(-fValue, -fValue, -0.001f); //0
-	vector3 pointG(fValue, fValue, -0.001f); //2
-	vector3 pointH(-fValue, fValue, -0.001f); //3
+vector3 pointE(fValue, -fValue, -0.001f); //1
+vector3 pointF(-fValue, -fValue, -0.001f); //0
+vector3 pointG(fValue, fValue, -0.001f); //2
+vector3 pointH(-fValue, fValue, -0.001f); //3
 
-											  //F
-	AddQuad(pointA, pointB, pointD, pointC);
-	//Double sided
-	AddQuad(pointE, pointF, pointG, pointH);
+										  //F
+AddQuad(pointA, pointB, pointD, pointC);
+//Double sided
+AddQuad(pointE, pointF, pointG, pointH);
 
-	CompileObject(a_v3Color);
+CompileObject(a_v3Color);
 }
 void MyPrimitive::GenerateCube(float a_fSize, vector3 a_v3Color)
 {
@@ -79,7 +84,7 @@ void MyPrimitive::GenerateCube(float a_fSize, vector3 a_v3Color)
 	vector3 point6(fValue, fValue, -fValue); //6
 	vector3 point7(-fValue, fValue, -fValue); //7
 
-											  //F
+	//F
 	AddQuad(point0, point1, point3, point2);
 
 	//B
@@ -110,7 +115,7 @@ void MyPrimitive::GenerateCone(float a_fRadius, float a_fHeight, int a_nSubdivis
 	Init();
 
 	//Your code starts here
-	float fValue = 0.5f;
+	/*float fValue = 0.5f;
 	//3--2
 	//|  |
 	//0--1
@@ -119,7 +124,34 @@ void MyPrimitive::GenerateCone(float a_fRadius, float a_fHeight, int a_nSubdivis
 	vector3 point2(fValue, fValue, fValue); //2
 	vector3 point3(-fValue, fValue, fValue); //3
 
-	AddQuad(point0, point1, point3, point2);
+	AddQuad(point0, point1, point3, point2);*/
+	
+	
+	for (int i = 0; i < a_nSubdivisions; i++)
+	{
+		//float angle = (360 / a_nSubdivisions) * 3.14159265 / 180 *i;
+		float angle = i*3.14149265 / a_nSubdivisions;
+		//float angle2 = 360 - 90 - angle;
+
+		vector3 point0(0.f, 0.f, 0.f);
+
+		//find side of tri
+		//float x = cos(angle)*a_fRadius;
+		//float z = sin(angle)*a_fRadius;
+		float x = cos(angle)*a_fRadius;
+		float z = sin(angle)*a_fRadius;
+
+		vector3 point1(-x, 0, z);
+		vector3 point3(x, 0, z);
+
+
+		//float twoX = x + x;
+		vector3 point2(0, a_fHeight, 0);
+		AddQuad(point0, point1, point3, point2);
+		
+	}
+
+
 
 	//Your code ends here
 	CompileObject(a_v3Color);

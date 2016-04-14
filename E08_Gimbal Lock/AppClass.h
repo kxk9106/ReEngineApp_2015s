@@ -16,9 +16,7 @@ class AppClass : public ReEngAppClass
 public:
 	typedef ReEngAppClass super;
 
-	matrix4 m_mToWorld;
-
-	vector3 m_v3Orientation;
+	quaternion m_quatOrientation;
 
 	/* Constructor */
 	AppClass(HINSTANCE hInstance, LPWSTR lpCmdLine, int nCmdShow) : super(hInstance, lpCmdLine, nCmdShow) {}

@@ -23,23 +23,26 @@ void AppClass::ProcessKeyboard(void)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 	{
-		m_v3Orientation = vector3(0.0f);
+		m_quatOrientation = quaternion(vector3(0.0f));
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::X))
 	{
-		if (!bModifier) m_v3Orientation.x += 1.0f;
-		else m_v3Orientation.x -= 1.0f;
+		if (!bModifier) {
+			
+			m_quatOrientation = m_quatOrientation * quaternion(vector3(.1f,0.0f,0.0f));
+		}
+		else m_quatOrientation = m_quatOrientation * quaternion(vector3(-.1f, 0.0f, 0.0f));
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y))
 	{
-		if (!bModifier) m_v3Orientation.y += 1.0f;
-		else m_v3Orientation.y -= 1.0f;
+		if (!bModifier) m_quatOrientation = m_quatOrientation * quaternion(vector3(0.f, .1f, 0.0f));
+		else m_quatOrientation = m_quatOrientation * quaternion(vector3(0.f, -.1f, 0.0f));
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
 	{
-		if (!bModifier) m_v3Orientation.z += 1.0f;
-		else m_v3Orientation.z -= 1.0f;
+		if (!bModifier)m_quatOrientation = m_quatOrientation * quaternion(vector3(0.f, 0.f, 0.1f));
+		else m_quatOrientation = m_quatOrientation * quaternion(vector3(0.f, 0.f, -0.1f));
 	}
 
 #pragma region Camera Positioning
