@@ -69,8 +69,7 @@ void AppClass::Update(void)
 	//Indicate the FPS
 	int nFPS = m_pSystem->GetFPS();
 	
-<<<<<<< HEAD
-=======
+
 
 	//Collision check goes here
 	vector3 v3Temp = vector3(m_m4Steve * vector4(m_v3Center1, 1.0f));
@@ -86,7 +85,7 @@ void AppClass::Update(void)
 	m_pMeshMngr->Print("z:" + std::to_string(v3Temp.z) + " ", RERED);
 	m_pMeshMngr->PrintLine("");
 
->>>>>>> 46ea48d6ba6b54e0d1e0fab3bba19581d428d680
+
 	//print info into the console
 	printf("FPS: %d            \r", nFPS);//print the Frames per Second
 	//Print info on the screen
@@ -118,8 +117,7 @@ void AppClass::Display(void)
 		break;
 	}
 	
-<<<<<<< HEAD
-=======
+
 	matrix4 m4Projection = m_pCameraMngr->GetProjectionMatrix();
 	matrix4 m4View = m_pCameraMngr->GetViewMatrix();
 
@@ -135,7 +133,7 @@ void AppClass::Display(void)
 	//m_pSphere2->Render(m4Projection, m4View, m4Model);
 	m_pMeshMngr->AddSphereToQueue(m_m4Creeper * glm::scale(vector3(m_fRadius2 * 2.0f)), RERED, WIRE);
 
->>>>>>> 46ea48d6ba6b54e0d1e0fab3bba19581d428d680
+
 	m_pMeshMngr->Render(); //renders the render list
 
 	m_pGLSystem->GLSwapBuffers(); //Swaps the OpenGL buffers
