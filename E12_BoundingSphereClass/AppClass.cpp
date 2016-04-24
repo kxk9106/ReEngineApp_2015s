@@ -18,9 +18,6 @@ void AppClass::InitVariables(void)
 	//Load Models
 	m_pMeshMngr->LoadModel("Minecraft\\Steve.obj", "Steve");
 	m_pMeshMngr->LoadModel("Minecraft\\Creeper.obj", "Creeper");
-
-	m_pBox1 = new MyBoundingCubeClass(m_pMeshMngr->GetVertexList("Steve"));
-	m_pBox2 = new MyBoundingCubeClass(m_pMeshMngr->GetVertexList("Creeper"));
 }
 
 void AppClass::Update(void)
@@ -41,33 +38,12 @@ void AppClass::Update(void)
 	m_pMeshMngr->SetModelMatrix(glm::translate(m_v3O1) * ToMatrix4(m_qArcBall), "Steve");
 	m_pMeshMngr->SetModelMatrix(glm::translate(m_v3O2), "Creeper");
 
-	m_pBox1->SetModelMatrix(m_pMeshMngr->GetModelMatrix("Steve"));
-	m_pBox2->SetModelMatrix(m_pMeshMngr->GetModelMatrix("Creeper"));
-
-	bool isColliding = m_pBox1->IsColliding(m_pBox2);
-
-	if (isColliding)
-	{
-		m_pMeshMngr->AddCubeToQueue(
-			glm::translate(vector3(m_pBox1->GetCenterG())) *
-			glm::scale(vector3(m_pBox1->GetSize())), RERED, SOLID);
-		m_pMeshMngr->AddCubeToQueue(glm::translate(vector3(m_pBox2->GetCenterG()))  *
-			glm::scale(vector3(m_pBox2->GetSize())), RERED, SOLID);
-	}
-	else
-	{
-		m_pMeshMngr->AddCubeToQueue(
-			glm::translate(vector3(m_pBox1->GetCenterG())) *
-			glm::scale(vector3(m_pBox1->GetSize())), REGREEN, WIRE);
-		m_pMeshMngr->AddCubeToQueue(glm::translate(vector3(m_pBox2->GetCenterG()))  *
-			glm::scale(vector3(m_pBox2->GetSize())), REGREEN, WIRE);
-	}
-	
 	//Adds all loaded instance to the render list
 	m_pMeshMngr->AddInstanceToRenderList("ALL");
 
 	//Indicate the FPS
 	int nFPS = m_pSystem->GetFPS();
+<<<<<<< HEAD
 	
 
 
@@ -86,11 +62,12 @@ void AppClass::Update(void)
 	m_pMeshMngr->PrintLine("");
 
 
+=======
+>>>>>>> 6aafa2bba23367993a586b81edcfefb2a4d59d61
 	//print info into the console
 	printf("FPS: %d            \r", nFPS);//print the Frames per Second
 	//Print info on the screen
 	m_pMeshMngr->PrintLine(m_pSystem->GetAppName(), REYELLOW);
-
 	m_pMeshMngr->Print("FPS:");
 	m_pMeshMngr->Print(std::to_string(nFPS), RERED);
 }
@@ -99,8 +76,8 @@ void AppClass::Display(void)
 {
 	//clear the screen
 	ClearScreen();
-
 	//Render the grid based on the camera's mode:
+<<<<<<< HEAD
 	switch (m_pCameraMngr->GetCameraMode())
 	{
 	default: //Perspective
@@ -134,24 +111,15 @@ void AppClass::Display(void)
 	m_pMeshMngr->AddSphereToQueue(m_m4Creeper * glm::scale(vector3(m_fRadius2 * 2.0f)), RERED, WIRE);
 
 
+=======
+	m_pMeshMngr->AddGridToRenderListBasedOnCamera(m_pCameraMngr->GetCameraMode());
+>>>>>>> 6aafa2bba23367993a586b81edcfefb2a4d59d61
 	m_pMeshMngr->Render(); //renders the render list
-
+	m_pMeshMngr->ResetRenderList(); //Reset the Render list after render
 	m_pGLSystem->GLSwapBuffers(); //Swaps the OpenGL buffers
 }
 
 void AppClass::Release(void)
 {
-	if (m_pBox1 != nullptr)
-	{
-		delete m_pBox1;
-		m_pBox1 = nullptr;
-
-	}
-	if (m_pBox2 != nullptr)
-	{
-		delete m_pBox2;
-		m_pBox2 = nullptr;
-
-	}
 	super::Release(); //release the memory of the inherited fields
 }
