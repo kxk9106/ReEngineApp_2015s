@@ -143,6 +143,12 @@ Global
 		{F8318B78-847D-4D6F-B0AA-F3AC80C5FFF0}.Debug|x86.Build.0 = Debug|Win32
 		{F8318B78-847D-4D6F-B0AA-F3AC80C5FFF0}.Release|x86.ActiveCfg = Release|Win32
 		{F8318B78-847D-4D6F-B0AA-F3AC80C5FFF0}.Release|x86.Build.0 = Release|Win32
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> ba032e0b21c3452abdec55e15d4e0f2f22ba474f
+=======
+>>>>>>> 15ce2befd774728a8c0f63712f26bb0e1e2c3b17
 		{05BD95CA-C5F7-45E3-A252-EF522EAAA809}.Debug|x86.ActiveCfg = Debug|Win32
 		{05BD95CA-C5F7-45E3-A252-EF522EAAA809}.Debug|x86.Build.0 = Debug|Win32
 		{05BD95CA-C5F7-45E3-A252-EF522EAAA809}.Release|x86.ActiveCfg = Release|Win32
@@ -219,6 +225,10 @@ Global
 		{AA18B089-83AC-4904-8600-CD68E61EDC26}.Debug|x86.Build.0 = Debug|Win32
 		{AA18B089-83AC-4904-8600-CD68E61EDC26}.Release|x86.ActiveCfg = Release|Win32
 		{AA18B089-83AC-4904-8600-CD68E61EDC26}.Release|x86.Build.0 = Release|Win32
+<<<<<<< HEAD
+=======
+>>>>>>> 6aafa2bba23367993a586b81edcfefb2a4d59d61
+>>>>>>> 15ce2befd774728a8c0f63712f26bb0e1e2c3b17
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

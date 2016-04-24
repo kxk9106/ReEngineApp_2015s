@@ -27,31 +27,96 @@ void AppClass::ProcessKeyboard(void)
 	float fDelta = 0.1f;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD:C1_LERP/AppClassControls.cpp
+		if (!bModifier) {
+			m_v3Rotation += vector3(1.0f, 0.0f, 0.0f);
+			m_m4Orientation *= glm::rotate(IDENTITY_M4, 1.0f, REAXISX);
+		}
+			
+		else {
+			m_v3Rotation += vector3(-1.0f, 0.0f, 0.0f);
+			m_m4Orientation *= glm::rotate(IDENTITY_M4, -1.0f, REAXISX);
+		}
+			
+=======
+>>>>>>> 15ce2befd774728a8c0f63712f26bb0e1e2c3b17
 		matrix4 m4Pallet = m_pPalletL->GetModelMatrix();
 		m_pPalletL->SetModelMatrix(m4Pallet * glm::translate(vector3(0.0f, fDelta, 0.0f)));
 		if (m_pPalletL->IsColliding(m_pBoxT))
 			m_pPalletL->SetModelMatrix(m4Pallet);
+<<<<<<< HEAD
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
+=======
+>>>>>>> 6aafa2bba23367993a586b81edcfefb2a4d59d61:E14_CollisionResolution/AppClassControls.cpp
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+	{
+<<<<<<< HEAD:C1_LERP/AppClassControls.cpp
+		if (!bModifier) {
+			m_v3Rotation += vector3(0.0f, 1.0f, 0.0f);
+			m_m4Orientation *= glm::rotate(IDENTITY_M4, 1.0f, REAXISY);
+		}
+
+		else {
+			m_v3Rotation += vector3(0.0f, -1.0f, 0.0f);
+			m_m4Orientation *= glm::rotate(IDENTITY_M4, -1.0f, REAXISY);
+		}
+=======
+>>>>>>> 15ce2befd774728a8c0f63712f26bb0e1e2c3b17
 		matrix4 m4Pallet = m_pPalletL->GetModelMatrix();
 		m_pPalletL->SetModelMatrix(m4Pallet * glm::translate(vector3(0.0f,-fDelta, 0.0f)));
 		if (m_pPalletL->IsColliding(m_pBoxB))
 			m_pPalletL->SetModelMatrix(m4Pallet);
+<<<<<<< HEAD
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::O))
 	{
+=======
+>>>>>>> 6aafa2bba23367993a586b81edcfefb2a4d59d61:E14_CollisionResolution/AppClassControls.cpp
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::O))
+	{
+<<<<<<< HEAD:C1_LERP/AppClassControls.cpp
+		if (!bModifier) {
+			m_v3Rotation += vector3(0.0f, 0.0f, 1.0f);
+			m_m4Orientation *= glm::rotate(IDENTITY_M4, 1.0f, REAXISZ);
+		}
+		else {
+			m_v3Rotation += vector3(0.0f, 0.0f, -1.0f);
+			m_m4Orientation *= glm::rotate(IDENTITY_M4, -1.0f, REAXISZ);
+		}
+=======
+>>>>>>> 15ce2befd774728a8c0f63712f26bb0e1e2c3b17
 		matrix4 m4Pallet = m_pPalletR->GetModelMatrix();
 		m_pPalletR->SetModelMatrix(m4Pallet * glm::translate(vector3(0.0f, fDelta, 0.0f)));
 		if (m_pPalletR->IsColliding(m_pBoxT))
 			m_pPalletR->SetModelMatrix(m4Pallet);
+<<<<<<< HEAD
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::L))
 	{
+=======
+>>>>>>> 6aafa2bba23367993a586b81edcfefb2a4d59d61:E14_CollisionResolution/AppClassControls.cpp
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::L))
+	{
+<<<<<<< HEAD:C1_LERP/AppClassControls.cpp
+		m_v3Rotation = vector3(0.0f, 0.0f, 0.0f);
+		m_m4Orientation = IDENTITY_M4;
+=======
+>>>>>>> 15ce2befd774728a8c0f63712f26bb0e1e2c3b17
 		matrix4 m4Pallet = m_pPalletR->GetModelMatrix();
 		m_pPalletR->SetModelMatrix(m4Pallet * glm::translate(vector3(0.0f, -fDelta, 0.0f)));
 		if (m_pPalletR->IsColliding(m_pBoxB))
 			m_pPalletR->SetModelMatrix(m4Pallet);
+<<<<<<< HEAD
+=======
+>>>>>>> 6aafa2bba23367993a586b81edcfefb2a4d59d61:E14_CollisionResolution/AppClassControls.cpp
+>>>>>>> 15ce2befd774728a8c0f63712f26bb0e1e2c3b17
 	}
 #pragma endregion
 

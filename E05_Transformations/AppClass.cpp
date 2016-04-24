@@ -48,6 +48,21 @@ void AppClass::Display(void)
 
 	//Renders the meshes using the specified position given by the matrix and in the specified color
 	m_pSphere->Render(m4Projection, m4View, m_m4Sphere);
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+	m_pCone->Render(m4Projection, m4View, m_m4Cone);
+	m_pCylinder->Render(m4Projection, m4View, m_m4Cylinder);
+	m_pTube->Render(m4Projection, m4View, m_m4Tube);
+	m_pTorus->Render(m4Projection, m4View, m_m4Torus);
+	m_pCube->Render(m4Projection, m4View, m_m4Cube);
+
+
+	//To render the render list (right now it only contains the grid)
+	m_pMeshMngr->Render();
+=======
+>>>>>>> 6aafa2bba23367993a586b81edcfefb2a4d59d61
+>>>>>>> 15ce2befd774728a8c0f63712f26bb0e1e2c3b17
 	
 	//Render the grid based on the camera's mode:
 	m_pMeshMngr->AddGridToRenderListBasedOnCamera(m_pCameraMngr->GetCameraMode());

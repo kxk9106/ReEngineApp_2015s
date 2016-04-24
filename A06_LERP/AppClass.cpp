@@ -58,7 +58,39 @@ void AppClass::Display(void)
 	//clear the screen
 	ClearScreen();
 	//Render the grid based on the camera's mode:
+<<<<<<< HEAD
 	m_pMeshMngr->AddGridToRenderListBasedOnCamera(m_pCameraMngr->GetCameraMode());
+=======
+<<<<<<< HEAD
+	switch (m_pCameraMngr->GetCameraMode())
+	{
+	default: //Perspective
+		m_pMeshMngr->AddGridToQueue(1.0f, REAXIS::XY); //renders the XY grid with a 100% scale
+		break;
+	case CAMERAMODE::CAMROTHOX:
+		m_pMeshMngr->AddGridToQueue(1.0f, REAXIS::YZ, RERED * 0.75f); //renders the YZ grid with a 100% scale
+		break;
+	case CAMERAMODE::CAMROTHOY:
+		m_pMeshMngr->AddGridToQueue(1.0f, REAXIS::XZ, REGREEN * 0.75f); //renders the XZ grid with a 100% scale
+		break;
+	case CAMERAMODE::CAMROTHOZ:
+		m_pMeshMngr->AddGridToQueue(1.0f, REAXIS::XY, REBLUE * 0.75f); //renders the XY grid with a 100% scale
+		break;
+	}
+
+	//renders points as spheres
+	matrix4 mProjection = m_pCameraMngr->GetProjectionMatrix();
+	matrix4 mView = m_pCameraMngr->GetViewMatrix();
+
+	for (uint i = 0; i < 11; i++)
+	{
+		m_pSphere[i].Render(mProjection, mView, m_pMatrix[i]);
+	}
+	
+=======
+	m_pMeshMngr->AddGridToRenderListBasedOnCamera(m_pCameraMngr->GetCameraMode());
+>>>>>>> 6aafa2bba23367993a586b81edcfefb2a4d59d61
+>>>>>>> 15ce2befd774728a8c0f63712f26bb0e1e2c3b17
 	m_pMeshMngr->Render(); //renders the render list
 	m_pMeshMngr->ResetRenderList(); //Reset the Render list after render
 	m_pGLSystem->GLSwapBuffers(); //Swaps the OpenGL buffers

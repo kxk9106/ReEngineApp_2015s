@@ -64,11 +64,24 @@ void AppClass::Display(void)
 	matrix4 m4Projection = m_pCameraMngr->GetProjectionMatrix();
 	matrix4 m4View = m_pCameraMngr->GetViewMatrix();
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+	m_pMesh->RenderList(m4Projection, m4View,m_fMatrixArray, m_nObjects);//Rendering nObjects
+
+	m_pMeshMngr->Render();
+
+=======
+>>>>>>> 15ce2befd774728a8c0f63712f26bb0e1e2c3b17
 	m_pMesh->Render(m4Projection, m4View, IDENTITY_M4);//Rendering nObjects
 													   //clear the screen
 	
 	m_pMeshMngr->Render(); //renders the render list
 	m_pMeshMngr->ResetRenderList(); //Reset the Render list after render
+<<<<<<< HEAD
+=======
+>>>>>>> 6aafa2bba23367993a586b81edcfefb2a4d59d61
+>>>>>>> 15ce2befd774728a8c0f63712f26bb0e1e2c3b17
 	m_pGLSystem->GLSwapBuffers(); //Swaps the OpenGL buffers
 }
 

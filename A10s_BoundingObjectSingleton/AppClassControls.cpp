@@ -41,6 +41,7 @@ void AppClass::ProcessKeyboard(void)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 		m_pCameraMngr->MoveVertical(fSpeed);
+
 #pragma endregion
 
 #pragma region Creeper Control

@@ -12,10 +12,21 @@ using namespace ReEng; //Using ReEng namespace to use all the classes in the dll
 
 class AppClass : public ReEngAppClass
 {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD:C1_LERP/AppClass.h
+	vector3 m_v3Rotation = vector3(0.0f);
+	matrix4 m_m4Orientation = IDENTITY_M4;
+=======
+>>>>>>> 15ce2befd774728a8c0f63712f26bb0e1e2c3b17
 	float m_fDepth = 0.0f;
 	TextureManagerSingleton* m_pTextureMngr = nullptr;
 	String m_sTexture;
 	bool m_bUsingTexture = false;
+<<<<<<< HEAD
+=======
+>>>>>>> 6aafa2bba23367993a586b81edcfefb2a4d59d61:07_RenderTarget/AppClass.h
+>>>>>>> 15ce2befd774728a8c0f63712f26bb0e1e2c3b17
 public:
 	typedef ReEngAppClass super;
 
