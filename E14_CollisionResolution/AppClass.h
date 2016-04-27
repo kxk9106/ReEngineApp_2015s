@@ -22,6 +22,9 @@ class AppClass : public ReEngAppClass
 	MyEntityClass* m_pPalletL = nullptr;
 	MyEntityClass* m_pPalletR = nullptr;
 
+	vector3 m_v3Rotation = vector3(0.0f);
+	matrix4 m_m4Orientation;
+
 public:
 	typedef ReEngAppClass super;
 
