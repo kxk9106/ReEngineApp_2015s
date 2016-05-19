@@ -122,7 +122,7 @@ void AppClass::Display(void)
 >>>>>>> 6aafa2bba23367993a586b81edcfefb2a4d59d61
 >>>>>>> 15ce2befd774728a8c0f63712f26bb0e1e2c3b17
 	m_pMeshMngr->Render(); //renders the render list
-	m_pMeshMngr->ResetRenderList(); //Reset the Render list after render
+	m_pMeshMngr->ClearRenderList(); //Reset the Render list after render
 	m_pGLSystem->GLSwapBuffers(); //Swaps the OpenGL buffers
 }
 

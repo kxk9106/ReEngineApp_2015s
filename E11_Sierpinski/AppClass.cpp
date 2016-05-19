@@ -77,11 +77,15 @@ void AppClass::Display(void)
 													   //clear the screen
 	
 	m_pMeshMngr->Render(); //renders the render list
+<<<<<<< HEAD
 	m_pMeshMngr->ResetRenderList(); //Reset the Render list after render
 <<<<<<< HEAD
 =======
 >>>>>>> 6aafa2bba23367993a586b81edcfefb2a4d59d61
 >>>>>>> 15ce2befd774728a8c0f63712f26bb0e1e2c3b17
+=======
+	m_pMeshMngr->ClearRenderList(); //Reset the Render list after render
+>>>>>>> d0e1c9178944f3ead2763e25e137ff4588b4cd76
 	m_pGLSystem->GLSwapBuffers(); //Swaps the OpenGL buffers
 }
 
